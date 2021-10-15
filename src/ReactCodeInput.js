@@ -33,7 +33,7 @@ class ReactCodeInput extends Component {
     super(props);
 
     const { fields, forceUppercase } = props;
-    let { value } = props;
+    let value = props.value || '';
 
     if (forceUppercase) {
       value = value.toUpperCase();
@@ -55,6 +55,10 @@ class ReactCodeInput extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.value == null) {
+      return;
+    }
+
     this.setState({
       value: nextProps.value,
     });
